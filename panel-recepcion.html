@@ -882,7 +882,7 @@ function renderDetail(ot) {
   const doneCt = ot.checkedItems.length;
   const totalCt = ot.items.length;
   const clPct = totalCt > 0 ? Math.round((doneCt/totalCt)*100) : 0;
-  const clientLink = `taller-tracker.html?ot=${ot.id}`;
+  const clientLink = `${window.location.origin}${window.location.pathname.replace('panel-recepcion.html','')}taller-tracker.html?ot=${ot.id}`;
 
   document.getElementById("detailPanel").innerHTML = `
     <div class="detail-view">
@@ -984,7 +984,7 @@ function copyLink(link) {
 function sendLinkWA(otId) {
   const ot = OTS.find(o => o.id === otId);
   if (!ot) return;
-  const link = `taller-tracker.html?ot=${ot.id}`;
+  const link = `${window.location.origin}${window.location.pathname.replace('panel-recepcion.html','')}taller-tracker.html?ot=${ot.id}`;
   const msg = encodeURIComponent(
     `¡Hola ${ot.clientName}! 👋 Te enviamos el link para seguir el estado de tu ${ot.car} en tiempo real:\n\n🔗 ${link}\n\nPodrás ver en qué etapa está tu auto y qué trabajos se están realizando. Cualquier consulta, estamos a disposición. 🚗\n\n— Infinity Posventa Services`
   );
