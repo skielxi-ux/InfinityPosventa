@@ -917,12 +917,21 @@ function advanceStep() {
   const ot = OTS[currentOTIdx];
   if (ot.step >= 4) return;
   ot.step++;
+
+  // Al llegar a "Lavado" (paso 3) → tildar todos los ítems automáticamente
+  if (ot.step === 3) {
+    ot.checkedItems = ot.items.map((_, i) => i);
+    renderChecklist(ot);
+    showToast("✅ Todos los trabajos completados automáticamente");
+  }
+
   renderEstado(ot);
   renderOTList();
   const msgs = ["","🔎 Diagnóstico iniciado","🔧 En reparación","✨ Lavado final","🎉 ¡OT completada!"];
   showToast(msgs[ot.step]);
   saveOTS();
   broadcast({ type:"STEP", otId: ot.id, step: ot.step });
+  broadcast({ type:"CHECK_ALL", otId: ot.id, checkedItems: ot.checkedItems, total: ot.items.length });
 
   // Cuando llega a "Listo para retirar" → mostrar modal WhatsApp
   if (ot.step === 4) {

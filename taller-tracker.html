@@ -1014,13 +1014,22 @@ channel.onmessage = (e) => {
   }
 
   if (msg.type === "CHECK") {
-    // Actualizar checklist visual
     const pct = Math.round((msg.done / msg.total) * 100);
     document.getElementById("mainProgress").style.width = pct + "%";
     document.getElementById("progressPct").textContent = pct + "% completado";
     if (msg.checked) showPulse("✓ " + (msg.itemName || "Ítem completado"));
-    // Re-render checklist con estado actualizado
     syncChecklist(msg.itemIdx, msg.checked);
+  }
+
+  if (msg.type === "CHECK_ALL") {
+    // Tildar todos los ítems en el panel del cliente
+    const items = document.querySelectorAll(".checklist-item");
+    items.forEach((el, i) => syncChecklist(i, true));
+    const clBar = document.getElementById("checklistProgress");
+    if (clBar) clBar.style.width = "100%";
+    document.getElementById("mainProgress").style.width = "82%";
+    document.getElementById("progressPct").textContent = "82% completado";
+    showPulse("✅ Todos los trabajos completados");
   }
 };
 
