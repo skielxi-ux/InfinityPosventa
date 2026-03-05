@@ -462,13 +462,7 @@
       <div class="progress-bar-fill" id="mainProgress" style="width:8%"></div>
     </div>
     <div class="progress-pct" id="progressPct">8% completado</div>
-    <div class="eta-row">
-      <div class="eta-icon">🕐</div>
-      <div>
-        <div class="eta-label">Hora estimada de entrega</div>
-        <div class="eta-time" id="etaText">Hoy, 16:30 hs</div>
-      </div>
-    </div>
+
   </div>
 
   <!-- Service Detail Card -->
@@ -778,11 +772,11 @@ const STEPS = [
   { name: "Vehículo recibido",    desc: "Tu auto ingresó al taller y fue asignado a un asesor.", icon: "🚗", time: "08:15 hs" },
   { name: "En diagnóstico",       desc: "Revisión inicial del sistema y verificación de la OT.",  icon: "🔎", time: "09:02 hs" },
   { name: "En reparación",        desc: "Ejecución de trabajos del service según protocolo.",      icon: "🔧", time: "En curso" },
-  { name: "Lavado final",         desc: "Limpieza interior y exterior antes de la entrega.",       icon: "✨", time: "~15:45 hs" },
-  { name: "Listo para retirar",   desc: "Tu auto está listo. Te esperamos en recepción.",          icon: "✅", time: "~16:30 hs" },
+  { name: "Lavado final",         desc: "Limpieza interior y exterior antes de la entrega.",       icon: "✨", time: "" },
+  { name: "Listo para retirar",   desc: "🎉 ¡Tu vehículo está listo! Ya podés pasar a retirarlo por recepción.",          icon: "✅", time: "" },
 ];
 const PROGRESS = [8, 30, 60, 80, 100];
-const ETAS = ["Hoy, 16:30 hs","Hoy, 16:30 hs","Hoy, 16:30 hs","Hoy, 16:00 hs","Listo ahora ✅"];
+const ETAS = ["","","","",""];
 let currentStep = 0;
 
 function renderChecklist(svcIdx) {
@@ -938,7 +932,7 @@ function applyOTData(ot) {
   renderSteps(step);
   document.getElementById("mainProgress").style.width = PROG[step] + "%";
   document.getElementById("progressPct").textContent = PROG[step] + "% completado";
-  document.getElementById("etaText").textContent = ETAS[step];
+
 
   // 5. Evidencia
   const evidenceSection = document.getElementById("evidenceSection");
