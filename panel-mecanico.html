@@ -922,7 +922,6 @@ function advanceStep() {
   if (ot.step === 3) {
     ot.checkedItems = ot.items.map((_, i) => i);
     renderChecklist(ot);
-    showToast("✅ Todos los trabajos completados automáticamente");
   }
 
   renderEstado(ot);
